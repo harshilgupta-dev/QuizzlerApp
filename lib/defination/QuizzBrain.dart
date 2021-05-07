@@ -29,4 +29,8 @@ class QuizzBrain{
         true),
 
   ];
+
+  String getQuestionText(int questionNumber){
+    return _questionsBank[questionNumber].questionText;
+  }
 }
