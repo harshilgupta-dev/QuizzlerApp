@@ -41,7 +41,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizzBrain.getQuestionText(questionNumber),
+                quizzBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -66,14 +66,14 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  bool correctAnswer=quizzBrain.getQuestionAnswer(questionNumber);
+                  bool correctAnswer=quizzBrain.getQuestionAnswer();
                   if(correctAnswer==true){
                     scoreKepper.add(Icon(Icons.check, color: Colors.green,));
-                    questionNumber++;
+                    quizzBrain.nextQuestion();
                   }
                   else{
                     scoreKepper.add(Icon(Icons.close, color: Colors.red,));
-                    questionNumber++;
+                    quizzBrain.nextQuestion();
                   }
                 }
                 );
@@ -95,14 +95,14 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  bool correctAnswer=quizzBrain.getQuestionAnswer(questionNumber);
+                  bool correctAnswer=quizzBrain.getQuestionAnswer();
                   if(correctAnswer==false){
                     scoreKepper.add(Icon(Icons.check, color: Colors.green,));
-                    questionNumber++;
+                    quizzBrain.nextQuestion();
                   }
                   else{
                     scoreKepper.add(Icon(Icons.close, color: Colors.red,));
-                    questionNumber++;
+                    quizzBrain.nextQuestion();
                   }
 
                   }
