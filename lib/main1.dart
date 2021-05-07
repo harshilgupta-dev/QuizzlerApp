@@ -45,7 +45,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                questionsBank[questionNumber].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -70,12 +70,15 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  scoreKepper.add(
-                      Icon(
-                        Icons.check,
-                        color: Colors.green,
-                      ),
-                  );
+                  bool correctAnswer=questionsBank[questionNumber].questionAnswer;
+                  if(correctAnswer==true){
+                    scoreKepper.add(Icon(Icons.check, color: Colors.green,));
+                    questionNumber++;
+                  }
+                  else{
+                    scoreKepper.add(Icon(Icons.close, color: Colors.red,));
+                    questionNumber++;
+                  }
                 }
                 );
               },
@@ -96,9 +99,16 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  scoreKepper.add(
-                    Icon(Icons.close, color: Colors.red,),
-                  );
+                  bool correctAnswer=questionsBank[questionNumber].questionAnswer;
+                  if(correctAnswer==false){
+                    scoreKepper.add(Icon(Icons.check, color: Colors.green,));
+                    questionNumber++;
+                  }
+                  else{
+                    scoreKepper.add(Icon(Icons.close, color: Colors.red,));
+                    questionNumber++;
+                  }
+
                   }
                 );
               },
