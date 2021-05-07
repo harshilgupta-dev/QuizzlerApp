@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'defination/QuizzBrain.dart';
 
+QuizzBrain quizzBrain = QuizzBrain();
+
 void main() => runApp(Quizzler());
 
 class Quizzler extends StatelessWidget {
