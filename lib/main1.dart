@@ -96,7 +96,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  bool correctAnswer=quizzBrain.questionsBank[questionNumber].questionAnswer;
+                  bool correctAnswer=quizzBrain.getQuestionText(questionNumber);
                   if(correctAnswer==false){
                     scoreKepper.add(Icon(Icons.check, color: Colors.green,));
                     questionNumber++;

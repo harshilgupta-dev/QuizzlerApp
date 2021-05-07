@@ -33,4 +33,7 @@ class QuizzBrain{
   String getQuestionText(int questionNumber){
     return _questionsBank[questionNumber].questionText;
   }
+  bool getQuestionAnswer(int questionNumber){
+    return _questionsBank[questionNumber].questionAnswer;
+  }
 }
