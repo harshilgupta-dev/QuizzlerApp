@@ -44,4 +44,11 @@ class QuizzBrain{
   bool getQuestionAnswer(){
     return _questionsBank[_questionNumber].questionAnswer;
   }
+
+  bool isFinished(){
+    if(_questionNumber<_questionsBank.length-1){
+      return true;
+    }
+    return false;
+  }
 }
