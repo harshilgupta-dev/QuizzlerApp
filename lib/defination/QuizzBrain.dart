@@ -51,4 +51,8 @@ class QuizzBrain{
     }
     return true;
   }
+
+  void reset(){
+    _questionNumber=0;
+  }
 }
