@@ -30,13 +30,19 @@ class QuizPage extends StatefulWidget {
 }
 class _QuizPageState extends State<QuizPage> {
 
+  int currentScore=0;
+
   void checkAnswer(bool userAnswer){
     bool correctAnswer=quizzBrain.getQuestionAnswer();
     if(correctAnswer==userAnswer){
       scoreKepper.add(Icon(Icons.check,color: Colors.green,));
+      currentScore++;
     }
     else {
       scoreKepper.add(Icon(Icons.close,color: Colors.red,));
+      if(currentScore==0){
+        currentScore=0;
+      }
     }
   }
 
@@ -84,9 +90,29 @@ class _QuizPageState extends State<QuizPage> {
                   }
                   else{
                     Alert(
-                      context: context,
-                      title: 'Finished',
-                      style: AlertStyle(isCloseButton: false,titleStyle: TextStyle(fontWeight: FontWeight.bold)),
+                        context: context,
+                        title: 'Test Finished',
+                        type: AlertType.success,
+                        content: Text('Score is $currentScore/12 '),
+                        style: AlertStyle(
+                            isCloseButton: false,
+                            titleStyle: TextStyle(fontWeight: FontWeight.bold,fontSize: 30.0)),
+                        buttons: [
+                          DialogButton(child: Text(
+                            'Give It Again',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                                color: Colors.white
+                            ),), onPressed: (){
+                            setState(() {
+                              quizzBrain.reset();
+                              scoreKepper.clear();
+                              currentScore=0;
+                              return Navigator.pop(context);
+                            });
+                          })
+                        ]
 
                     ).show();
                   }
@@ -110,6 +136,38 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
+                  if(!quizzBrain.isFinished()){
+                    checkAnswer(false);
+                    quizzBrain.nextQuestion();
+                  }
+                  else{
+                    Alert(
+                        context: context,
+                        title: 'Test Finished',
+                        type: AlertType.success,
+                        content: Text('Score is $currentScore/12 '),
+                        style: AlertStyle(
+                            isCloseButton: false,
+                            titleStyle: TextStyle(fontWeight: FontWeight.bold,fontSize: 30.0)),
+                        buttons: [
+                          DialogButton(child: Text(
+                            'Give It Again',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                                color: Colors.white
+                            ),), onPressed: (){
+                            setState(() {
+                              quizzBrain.reset();
+                              scoreKepper.clear();
+                              currentScore=0;
+                              return Navigator.pop(context);
+                            });
+                          })
+                        ]
+
+                    ).show();
+                  }
                   }
                 );
               },
@@ -124,6 +182,7 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
+
 
 
 
