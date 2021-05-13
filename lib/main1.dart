@@ -85,7 +85,9 @@ class _QuizPageState extends State<QuizPage> {
                   else{
                     Alert(
                       context: context,
-                      title: 'hi'
+                      title: 'Finished',
+                      style: AlertStyle(isCloseButton: false,titleStyle: TextStyle(fontWeight: FontWeight.bold)),
+
                     ).show();
                   }
                 }
