@@ -47,8 +47,8 @@ class QuizzBrain{
 
   bool isFinished(){
     if(_questionNumber<_questionsBank.length-1){
-      return true;
+      return false;
     }
-    return false;
+    return true;
   }
 }

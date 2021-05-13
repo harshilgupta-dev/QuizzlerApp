@@ -29,6 +29,17 @@ class QuizPage extends StatefulWidget {
   _QuizPageState createState() => _QuizPageState();
 }
 class _QuizPageState extends State<QuizPage> {
+
+  void checkAnswer(bool userAnswer){
+    bool correctAnswer=quizzBrain.getQuestionAnswer();
+    if(correctAnswer==userAnswer){
+      scoreKepper.add(Icon(Icons.check,color: Colors.green,));
+    }
+    else {
+      scoreKepper.add(Icon(Icons.close,color: Colors.red,));
+    }
+  }
+
   List<Icon> scoreKepper=[];
   @override
   Widget build(BuildContext context) {
@@ -67,14 +78,15 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  bool correctAnswer=quizzBrain.getQuestionAnswer();
-                  if(correctAnswer==true){
-                    scoreKepper.add(Icon(Icons.check, color: Colors.green,));
+                  if(!quizzBrain.isFinished()){
+                    checkAnswer(true);
                     quizzBrain.nextQuestion();
                   }
                   else{
-                    scoreKepper.add(Icon(Icons.close, color: Colors.red,));
-                    quizzBrain.nextQuestion();
+                    Alert(
+                      context: context,
+                      title: 'hi'
+                    ).show();
                   }
                 }
                 );
@@ -96,16 +108,6 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  bool correctAnswer=quizzBrain.getQuestionAnswer();
-                  if(correctAnswer==false){
-                    scoreKepper.add(Icon(Icons.check, color: Colors.green,));
-                    quizzBrain.nextQuestion();
-                  }
-                  else{
-                    scoreKepper.add(Icon(Icons.close, color: Colors.red,));
-                    quizzBrain.nextQuestion();
-                  }
-
                   }
                 );
               },
@@ -120,6 +122,8 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
+
+
 
 /*
 question1: 'You can lead a cow down stairs but not up stairs.', false,
